@@ -1,0 +1,188 @@
+<script>
+//ATUALIZADO ESSA MADRUGADA
+//personagem primeiro a ser criado, começo com nome, ataque, defesa e vida; 
+//minhas variaveis 
+//alt + Z para quebrar a linha 
+
+//function fica sempre no inicio do codigos. sempre agrupados
+function portaMisteriosa(){ 
+alert('Você entrou em uma sala.')
+console.log('Você encontrou um báu misterioso, e nesse bau havia 3 itens: uma espada longa e dourada, uma armadura lindae reluzente como as estrelas, e um cogumelo misterioso vermelha com bolinhas brnacas.')
+escolhaItem = parseInt(prompt('Qual o primeiro item que voce gostaria de pegar? \n1 - espada longa e dourada \n2 - armadura reluzente como as estrelhas \n3- cogumelo misterioso vermelho com bolinhas brancas \nQual a sua escolha?'))
+
+while (escolhaItem < 1 || escolhaItem > 3){ 
+    escolhaItem = parseInt(prompt('Ta brincando com o sistema? Escolhe um item direito, senão voce vai acabar ficando sem nada. \n1 - espada longa e dourada \n2 - armadura reluzente como as estrelhas \n3- cogumelo misterioso vermelho com bolinhas brancas')) 
+}
+
+console.log('Ao escolher o item, o bau se fechou e você não conseguiu abrir novamente para pegar o restante dos itens.')
+
+return escolhaItem
+}
+
+function corredorEscuro () {
+    alert ('Você esta em um corredor longo e escuro... muito curioso com o que vem a frente, Então você segue ate se deparar com um Dragão')
+    alert ('O dragão vem correndo ate voce, e voce descobre que precisa lutar com ele para seguir no jogo')
+    alert ('Que a batalha comece!')
+console.log ('Você começa a lutar com o dragão e percebe que é muito mais forte do que ele e em poucos ataques ja consegue ganhar e seguir o caminho')
+}
+
+function entrarEsquerda () { 
+    vidaJogador = vidaJogador - 20
+    defesaJogador = defesaJogador - 10
+    alert ("Você decidiu entrar a Esquerda e com isso perdeu 20 de vida e 10 de Defesa")
+    alert ('Claramente não foi uma decisão nada boa ;( \nAtaque:'+ ataqueJogador + '\nDefesa:' + defesaJogador + '\nVida:' + vidaJogador)
+    if (vidaJogador <= 0) { 
+        Alert ("FIM DE JOGO")
+    }
+    else {
+        alert ("Vamos voltar para o corredor da direita.")
+    }
+    entrarDireita ()
+}
+
+function entrarDireita () {
+    ataqueJogador = ataqueJogador + 15
+    alert ("E então você recebe uma arma poderosa e o seu ataque  aumenta em 15")
+    alert ('\nAtaque:'+ ataqueJogador + '\nDefesa:' + defesaJogador + '\nVida:' + vidaJogador)
+}
+
+nomeJogador = ""
+ataqueJogador = 15
+defesaJogador = 10 
+vidaJogador = 30 
+
+nomeJogador = prompt('Olá jovem aventureiro, me diga qual o seu nome ?')
+alert(nomeJogador + ', Seja bem vindo(a) a caverna do Dragão...')
+
+console.log('Você caiu em um burado e ao se levantar voce se deparou com a seguinte escolha, ao seu lado direito voce nota uma porta grande com madeira avermelhada e com o aspecto de velha caindo aos pedaços, e do lado direito você nota um corredor longo e escuro sem consegui ver o final.')
+
+// como eu  preciso de uma outra resposta, vou criar um avariavel de escolha 
+
+escolha = prompt('Qual vai ser a sua decisão: \n1- Você escolhe seguir a direita (porta misteriosa) \n2- você escolhe seguir em frente (corredor escuro.)')
+//F12 na pagina web para abrir dev tools 
+
+//prompt sempre vem com string, so altero para parseInt quando preciso fazer um calculo; 
+// variavel escolha é a escolha que ele fez pelo porta ao inves do corredor
+if (escolha == '1'){ 
+    item = portaMisteriosa ()
+    //item é a variavel que ele escolheu do bau la na function acima 
+    if (item == 1) { 
+        ataqueJogador = ataqueJogador + 5 
+        alert('Ao segurar uma espada voce sente uma força de vontade percorrendo o seu corpo com a sabedoria e destreza do rei antigo.')
+    }
+    else if (item == 2) { 
+        defesaJogador = defesaJogador + 10 
+        alert('Ao vestir a armadura, voce sente um cospo entrando em seu corpo com as alasdo submndo ao seu corpo.')
+    }
+    else if (item ==3){
+        vidaJogador = vidaJogador + 30 
+        alert('Ao consumir o cogumelo (voce é estranho comendo coisas achadas assim do nada) voce sente como se tivesse duplicado de tamanho.')
+    }
+    
+    alert ('Você sente sua força aumentando \nAtaque:'+ ataqueJogador + '\nDefesa:' + defesaJogador + '\nVida:' + vidaJogador)
+    corredorEscuro()
+}
+
+if (escolha == '2') { 
+    // se so tem alerta não precisa retornar um valor entao eu deixo somente chamando a funcao;
+    corredorEscuro () 
+}
+ataqueDragao = 12
+defesaDragao = 9 
+vidaDragao = 15
+
+// tecnica fibonacci (mesma logica) O dano do jogador é igual ao ataque do jogador e tira da defesa do dragao; 
+//a vida do dragao é igual a vida do dragao menos o dano do jogador; 
+
+    while (vidaDragao > 0 || vidaJogador > 0){
+
+        danoJogador = ataqueJogador - defesaDragao
+        danoDragao = ataqueDragao - defesaJogador 
+        // se eu tenho 12 de ataque e 10 de defesa entao 10 ficou no escudo e 2 me atingiu 
+        // mas seu eu pegar o escudo aumenta em 10 a minha defesa 
+        // se eu tenho 12 de ataque e 20 de defesa então não vai alterar minha vida, porque 20 é muito maior do que o ataque dele de 12;
+
+        if (danoJogador > 0){
+            vidaDragao  = vidaDragao - danoJogador
+            alert (nomeJogador + ', deu ' + danoJogador + ' de dano no Dragão')
+        }
+        if (vidaDragao <= 0) {
+
+            alert ("Parabens, você venceu a luta")
+            break
+        }
+    
+
+ // Dragao
+        if (danoDragao > 0){
+            vidaJogador = vidaJogador - danoDragao
+            alert('O Dragão deu' + danoDragao + ' de dano ' + nomeJogador)
+        }
+        else {
+            alert('O Dragão não conseguiu dar dano no ' + nomeJogador)       
+        }
+        if (vidaJogador <= 0){
+            alert ("Você Perdeu a Batalha, Fim de Jogo!")
+            break
+        }
+    }
+    alert ('\nAtaque:'+ ataqueJogador + '\nDefesa:' + defesaJogador + '\nVida:' + vidaJogador)
+alert ("Fala serio... essa batalha foi bem fácil! \nNesse jogo você terá que fazer escolhas sabias para sobreviver e conseguir chegar até o final.")
+alert ("Você continua nesse corredor, mas logo a frente tem PRECISA tomar a decisão de ir para a Esquerda ou para a direita")
+escolha2 = parseInt(prompt("Eai" + nomeJogador +" qual vai ser a sua decisão? \n1- Entrar corredor a esquerda? \n2- Entrar no corredor a direita?"))
+    if (escolha2 == 1) {
+        entrarEsquerda ()
+    }
+
+    else if (escolha2 == 2) {
+        alert ("Parabéns, Sábia escolha!")
+        alert ("Ao entrar a Direita você recebe uma armadura e a sua defesa aumenta em 10 \nE a sua vida também aumenta em 10")
+        defsaJogeador = defesaJogador + 10
+        vidaJogador = vidaJogador + 10
+        entrarDireita ()
+    }
+    while (escolha2 < 1 || escolha2 > 2){ 
+    escolhaItem = parseInt(prompt('Decisão inválida!!! \n1- Entrar corredor a esquerda? \n2- Entrar no corredor a direita?')) 
+}
+
+    alert ("Ao Seguir no corredor direito você se depara com um Dragão muito maior, com o dobro dos atributos do primeiro e percebe que o outro era só o filhote e essa era uma mãe com muita raiva que você matou o bebê dela")
+    if (escolha2 == 1) {
+    alert (" Essa Batalha parece que não vai ser nada fácil, tendo em vista que já perdeu muita vida com a decisão anterior, mas vamos lá!!")
+    }
+    else if (escolha2 == 2) { 
+        alert ("Ahhh ainda bem que anteriormente, você escolheu entrar a direita porque vai precisar de todos os recursos ")
+    }
+
+    ataqueMamaeDragao = 30
+    defesaMamaeDragao = 15 
+    vidaMamaeDragao = 20
+
+    while (vidaMamaeDragao > 0 || vidaJogador > 0){
+
+danoJogador = ataqueJogador - defesaMamaeDragao
+danoMamaeDragao = ataqueMamaeDragao - defesaJogador 
+
+    if (danoJogador > 0){
+        vidaMamaeDragao  = vidaMamaeDragao - danoJogador
+        alert (nomeJogador + ', deu ' + danoJogador + ' de dano no Dragão')
+    }
+        if (vidaMamaeDragao <= 0) {
+
+        alert ("Que incrivel! Que Incrivel!! \nVocê acaba de derrotar a Mãe dos Dragões o/")
+        alert ("Foi bom ter você nessa jornada, estamos preparando uma proxima fase com muito mais obstáculos \nObrigada pela participação ;-)")
+        break
+        }
+    //mamaeDragao
+    if (danoMamaeDragao > 0){
+            vidaJogador = vidaJogador - danoMamaeDragao
+            alert('O Dragão deu' + danoMamaeDragao + ' de dano ' + nomeJogador)
+        }
+        else {
+            alert('A mamãe Dragão não conseguiu dar dano em ' + nomeJogador)       
+        }
+        if (vidaJogador <= 0){
+            alert ("Reinicie o jogo e troque as suas escolhas para ficar mais forte! \nGame Over")
+            break
+        }
+}
+</script>
